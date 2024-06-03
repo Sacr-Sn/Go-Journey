@@ -5,15 +5,9 @@ package main
 // 然后会在S01中生成一个go.mod文件，这个文件对S01文件夹下所有子目录都有效
 
 import (
-	simle_math "S01/math"
-	"fmt"
+	mytest "S01/test"
 )
 
 func main() {
-	a := 3
-	b := 5
-	fmt.Printf("this is %d\n", a)
-	fmt.Printf("this is %d\n", b)
-	fmt.Printf("a + b = %d\n", simle_math.Add(a, b))
-	fmt.Printf("a - b = %d\n", simle_math.Sub(a, b))
+	mytest.Test04()
 }
