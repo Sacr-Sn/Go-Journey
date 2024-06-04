@@ -9,5 +9,5 @@ import (
 )
 
 func main() {
-	mytest.Test04()
+	mytest.Test07()
 }

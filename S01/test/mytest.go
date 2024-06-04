@@ -3,6 +3,7 @@ package mytest
 import (
 	simle_math "S01/math"
 	"fmt"
+	"math"
 	"unsafe"
 )
 
@@ -133,4 +134,66 @@ func Test04() {
 		k = iota
 	)
 	fmt.Printf("now iota = %d", k) // now iota = 0
+}
+
+/*
+Go语言函数可以返回多个值，返回几个值就在返回值列表中写几个对应的类型
+*/
+func getLargerAndSmaller(x, y int) (int, int) {
+	return (x + y + int(math.Abs(float64(x-y)))) / 2, (x + y - int(math.Abs(float64(x-y)))) / 2
+}
+
+/*
+函数
+*/
+func Test05() {
+	a, b := 3, 5
+	larger, smaller := getLargerAndSmaller(a, b)
+	fmt.Printf("the bigger and smaller num between %d and %d is : %d and %d\n", a, b, larger, smaller)
+}
+
+func printArr(arr []int) {
+	for i := 0; i < len(arr); i++ {
+		print(arr[i], ", ")
+	}
+	println()
+}
+
+/*
+数组
+*/
+func Test06() {
+	// 声明一个大小为5的未初始化的数组，默认初始化元素为0
+	var arr1 [5]int
+	printArr(arr1[:]) // 以切片方式传参，可以节省内存，也可以避免容量不同的数组之间类型不匹配 0, 0, 0, 0, 0,
+
+	// 也可以不指定数组长度，用...
+	arr2 := [...]int{1, 2, 3, 4}
+	printArr(arr2[:]) // 1, 2, 3, 4,
+	arr3 := []int{4, 3, 2}
+	printArr(arr3[:]) // 4, 3, 2,
+
+	// 如果设置了数组的长度，我们还可以通过指定下标来初始化元素
+	arr4 := [5]int{1: 9, 3: 5}
+	printArr(arr4[:]) // 0, 9, 0, 5, 0,
+}
+
+/*
+指针
+*/
+func Test07() {
+	a := 999
+	// 声明指针类型
+	var ptr_a *int
+	ptr_a = &a
+	ptr_b := &a
+
+	*ptr_a = 10
+
+	fmt.Printf("a = %d\n", a)            // a = 10
+	fmt.Printf("a的内存地址：%x\n", &a)        // a的内存地址：c00000a0a8
+	fmt.Printf("ptr_a = %x\n", ptr_a)    // ptr_a = c00000a0a8
+	fmt.Printf("ptr_a指向的值：%d\n", *ptr_a) // ptr_a指向的值：10
+	fmt.Printf("ptr_b = %x\n", ptr_b)    // ptr_b = c00000a0a8
+	fmt.Printf("ptr_b指向的值：%d\n", *ptr_b) // ptr_b指向的值：10
 }
